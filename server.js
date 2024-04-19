@@ -16,7 +16,11 @@ app.use((req, res, next) => {
 
 
 app.get('/', (req, res) => {
+  if(!req.ok){
+    res.status.json()
+  } else {
   res.send(data)
+  }
 });
 
 // app.get('/api/v1/data/:endpoint', (req, res) => {
