@@ -25,7 +25,7 @@ app.get('/api/v1/data/:endpoint', (req, res) => {
 });
 
 app.get('/api/v1/data/users/:id', (req, res) => {
-  console.log(req.params)
+  console.log("*********GET USERS*********",req.params)
   const id = req.params.id
   const findUser = data.users.find((user) => user.id === `${id}`)
   if (findUser) {
@@ -53,7 +53,7 @@ app.post('/api/v1/data/users/:id', (req, res) => {
   // const newData = req.body;
   // const dataKey = Object.keys(newData)
   // const userIndex = data.persistentData.users.findIndex(user => user.id === id);
-  console.log(req)
+  console.log("*********POST USERS*********",req.params)
 
   // if (userIndex !== -1) {
       
