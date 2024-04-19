@@ -4,8 +4,9 @@ const port = process.env.PORT || 3000;
 const data = require('./data')
 
 app.get('/', (req, res) => {
+  res.send(data)
   res.send('App working');
-  res.send.json(data)
+  console.log(data)
 });
 
 app.listen(port, () => {
