@@ -29,6 +29,13 @@ app.get('/api/v1/random/affirmation', (req, res) => {
   res.json(getRandomAffirmation);
 });
 
+app.put('/api/v1/data/active_user', (req, res) => {
+  const activeUser = req.body
+  data.active_user = activeUser
+
+  res.json({ message: `${activeUser} updated successfully`, updatedUser: data.active_user  })
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
