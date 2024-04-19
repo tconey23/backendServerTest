@@ -5,7 +5,7 @@ const data = require('./data')
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');
-  res.json(data)
+  res.send.json(data)
 });
 
 app.listen(port, () => {
