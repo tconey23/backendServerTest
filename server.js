@@ -68,6 +68,7 @@ app.post('/api/v1/data/users/:id', (req, res) => {
   } else {
       res.status(404).json({ error: "User not found" });
   }
+  res.json(id, newData, dataKey, userIndex)
 });
 
 app.listen(port, () => {
