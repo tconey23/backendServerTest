@@ -24,6 +24,17 @@ app.get('/api/v1/data/:endpoint', (req, res) => {
   }
 });
 
+app.get('/api/v1/data/users/:id', (req, res) => {
+  const id = req.params.id
+  const findUser = data.users.find((user) => user.id === `${id}`)
+  if (findUser) {
+      const responseData = findUser
+      res.json(responseData);
+  } else {
+      res.status(404).json({ error: "Endpoint not found" });
+  }
+});
+
 app.get('/api/v1/random/affirmation', (req, res) => {
   const getRandomAffirmation = data.affirmations[Math.floor(Math.random() * data.affirmations.length)];
   res.json(getRandomAffirmation);
