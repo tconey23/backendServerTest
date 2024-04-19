@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-app.use(express.json()); // This line is crucial
+app.use(express.json());
 const port = process.env.PORT || 3000;
 const data = require('./data');
 
@@ -55,25 +55,24 @@ app.post('/api/v1/data/users/:id', (req, res) => {
   const id = req.params;
   const newData = req.body;
   const dataKey = Object.keys(newData)
-  const userIndex = data.persistentData.users.findIndex(user => user.id === id);
+  const userIndex = data.users.findIndex(user => user.id === id);
 
 
-  // if (userIndex !== -1) {
+  if (userIndex !== -1) {
       
-  //     if (!data.persistentData.users[userIndex][dataKey]) {
-  //        data.persistentData.users[userIndex][dataKey] = [];
-  //     }
-  //     const duplicateRecord =  data.persistentData.users[userIndex][dataKey].includes(newData[dataKey])
-  //     if(!duplicateRecord){
-  //         data.persistentData.users[userIndex][dataKey].push(newData[dataKey]);
-  //         res.json({ message: `${dataKey} updated successfully`, updatedUser: data.persistentData.users[userIndex] })
-  //     }else {
-  //         res.json('Duplicate Record')
-  //     }
-  // } else {
-  //     res.status(404).json({ error: "User not found" });
-  // }
-  console.log(id, newData, dataKey, userIndex)
+      if (!data.users[userIndex][dataKey]) {
+         data.users[userIndex][dataKey] = [];
+      }
+      const duplicateRecord =  data.users[userIndex][dataKey].includes(newData[dataKey])
+      if(!duplicateRecord){
+          data.users[userIndex][dataKey].push(newData[dataKey]);
+          res.json({ message: `${dataKey} updated successfully`, updatedUser: data.users[userIndex] })
+      }else {
+          res.json('Duplicate Record')
+      }
+  } else {
+      res.status(404).json({ error: "User not found" });
+  }
 });
 
 app.listen(port, () => {
