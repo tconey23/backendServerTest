@@ -5,12 +5,12 @@ const app = express();
 const port = process.env.PORT || 3000;
 const data = require('./data')
 
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//   res.setHeader('Access-Control-Allow-Credentials', 'true');
-//   next();
-// })
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  // next();
+})
 
 app.get('/', (req, res) => {
   res.send(data)
