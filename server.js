@@ -47,6 +47,29 @@ app.put('/api/v1/data/active_user', (req, res) => {
   res.json({ message: `${activeUser} updated successfully`, updatedUser: data.active_user  })
 });
 
+app.post('/api/v1/data/users/:id', (req, res) => {
+  const id = req.params.id;
+  const newData = req.body;
+  const dataKey = Object.keys(newData)
+  const userIndex = data.persistentData.users.findIndex(user => user.id === id);
+
+  if (userIndex !== -1) {
+      
+      if (!data.persistentData.users[userIndex][dataKey]) {
+         data.persistentData.users[userIndex][dataKey] = [];
+      }
+      const duplicateRecord =  data.persistentData.users[userIndex][dataKey].includes(newData[dataKey])
+      if(!duplicateRecord){
+          data.persistentData.users[userIndex][dataKey].push(newData[dataKey]);
+          res.json({ message: `${dataKey} updated successfully`, updatedUser: data.persistentData.users[userIndex] })
+      }else {
+          res.json('Duplicate Record')
+      }
+  } else {
+      res.status(404).json({ error: "User not found" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
