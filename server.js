@@ -25,6 +25,7 @@ app.get('/api/v1/data/:endpoint', (req, res) => {
 });
 
 app.get('/api/v1/data/users/:id', (req, res) => {
+  console.log(req.params)
   const id = req.params.id
   const findUser = data.users.find((user) => user.id === `${id}`)
   if (findUser) {
