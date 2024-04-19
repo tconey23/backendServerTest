@@ -57,6 +57,7 @@ app.post('/api/v1/data/users/:id', (req, res) => {
   const dataKey = Object.keys(newData)
   const userIndex = data.users.findIndex(user => user.id === id);
 
+  console.log("*********POST USERS*USER********",userIndex)
 
   if (userIndex !== -1) {
       
