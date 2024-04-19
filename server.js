@@ -52,7 +52,7 @@ app.put('/api/v1/data/active_user', (req, res) => {
 app.post('/api/v1/data/users/:id', (req, res) => {
   console.log("*********POST USERS*PARAMS********",req.params)
   console.log("*********POST USERS*BODY********",req.body)
-  const id = req.params;
+  const id = req.params.id;
   const newData = req.body;
   const dataKey = Object.keys(newData)
   const userIndex = data.users.findIndex(user => user.id === id);
