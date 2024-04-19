@@ -49,11 +49,12 @@ app.put('/api/v1/data/active_user', (req, res) => {
 });
 
 app.post('/api/v1/data/users/:id', (req, res) => {
-  // const id = req.params.id;
-  // const newData = req.body;
-  // const dataKey = Object.keys(newData)
-  // const userIndex = data.persistentData.users.findIndex(user => user.id === id);
-  console.log("*********POST USERS*********",req.params)
+  const id = req.params.id;
+  const newData = req.body;
+  const dataKey = Object.keys(newData)
+  const userIndex = data.persistentData.users.findIndex(user => user.id === id);
+  console.log("*********POST USERS*PARAMS********",req.params)
+  console.log("*********POST USERS*BODY********",req.body)
 
   // if (userIndex !== -1) {
       
@@ -70,7 +71,7 @@ app.post('/api/v1/data/users/:id', (req, res) => {
   // } else {
   //     res.status(404).json({ error: "User not found" });
   // }
-  res.json(id, newData, dataKey, userIndex)
+  console.log(id, newData, dataKey, userIndex)
 });
 
 app.listen(port, () => {
