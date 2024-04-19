@@ -1,28 +1,32 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
-const data = require('./data')
+const data = require('./data');
+
+// Enable CORS for all routes
+app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send(data)
+  res.send(data);
   res.send('App working');
-  console.log(data)
+  console.log(data);
 });
 
 app.get('/api/v1/data/:endpoint', (req, res) => {
-  const endpoint = req.params.endpoint
-  const findEndpoint = data[endpoint]
+  const endpoint = req.params.endpoint;
+  const findEndpoint = data[endpoint];
 
-  if(findEndpoint){
+  if (findEndpoint) {
     res.send(data[endpoint]);
-  }  else {
+  } else {
     res.status(404).json({ error: "Endpoint not found" });
   }
 });
 
 app.get('/api/v1/random/affirmation', (req, res) => {
-  const getRandomAffirmation = data.affirmations[Math.floor(Math.random() * data.affirmations.length)]
-  res.json(getRandomAffirmation)
+  const getRandomAffirmation = data.affirmations[Math.floor(Math.random() * data.affirmations.length)];
+  res.json(getRandomAffirmation);
 });
 
 app.listen(port, () => {
