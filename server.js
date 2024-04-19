@@ -48,11 +48,11 @@ app.put('/api/v1/data/active_user', (req, res) => {
 });
 
 app.post('/api/v1/data/users/:id', (req, res) => {
-  const id = req.params.id;
-  const newData = req.body;
-  const dataKey = Object.keys(newData)
-  const userIndex = data.persistentData.users.findIndex(user => user.id === id);
-  console.log(id, newData, dataKey, userIndex)
+  // const id = req.params.id;
+  // const newData = req.body;
+  // const dataKey = Object.keys(newData)
+  // const userIndex = data.persistentData.users.findIndex(user => user.id === id);
+  console.log(req)
 
   // if (userIndex !== -1) {
       
