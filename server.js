@@ -1,26 +1,12 @@
 const express = require('express');
-// const cors = require('cors');
 const app = express();
-
-// app.use(cors());
-
 const port = process.env.PORT || 3000;
-const data = require('./data');
-
-app.use((req, res, next) => {
-  // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  // res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  // res.setHeader('Access-Control-Allow-Credentials', 'true');
-  // next();
-});
-
+const data = require('./data')
 
 app.get('/', (req, res) => {
-  if(!req.ok){
-    res.status.json()
-  } else {
   res.send(data)
-  }
+  res.send('App working');
+  console.log(data)
 });
 
 app.get('/api/v1/data/:endpoint', (req, res) => {
