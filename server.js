@@ -52,6 +52,7 @@ app.post('/api/v1/data/users/:id', (req, res) => {
   const newData = req.body;
   const dataKey = Object.keys(newData)
   const userIndex = data.persistentData.users.findIndex(user => user.id === id);
+  console.log(id, newData, dataKey, userIndex)
 
   // if (userIndex !== -1) {
       
