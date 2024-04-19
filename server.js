@@ -9,9 +9,20 @@ app.get('/', (req, res) => {
   console.log(data)
 });
 
-app.get('/:endpoint', (req, res) => {
+app.get('/api/v1/data/:endpoint', (req, res) => {
   const endpoint = req.params.endpoint
-  res.send(data[endpoint]);
+  const findEndpoint = data[endpoint]
+
+  if(findEndpoint){
+    res.send(data[endpoint]);
+  }  else {
+    res.status(404).json({ error: "Endpoint not found" });
+  }
+});
+
+app.get('/api/v1/random/affirmation', (req, res) => {
+  const getRandomAffirmation = data.affirmations[Math.floor(Math.random() * data.affirmations.length)]
+  res.json(getRandomAffirmation)
 });
 
 app.listen(port, () => {
