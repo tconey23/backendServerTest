@@ -23,22 +23,22 @@ app.get('/', (req, res) => {
   }
 });
 
-// app.get('/api/v1/data/:endpoint', (req, res) => {
-//   const endpoint = req.params.endpoint
-//   const findEndpoint = data[endpoint]
+app.get('/api/v1/data/:endpoint', (req, res) => {
+  const endpoint = req.params.endpoint
+  const findEndpoint = data[endpoint]
 
-//   if(findEndpoint){
-//     res.send(data[endpoint]);
-//   }  else {
-//     res.status(404).json({ error: "Endpoint not found" });
-//   }
-// });
+  if(findEndpoint){
+    res.send(data[endpoint]);
+  }  else {
+    res.status(404).json({ error: "Endpoint not found" });
+  }
+});
 
-// app.get('/api/v1/random/affirmation', (req, res) => {
-//   const getRandomAffirmation = data.affirmations[Math.floor(Math.random() * data.affirmations.length)]
-//   res.json(getRandomAffirmation)
-// });
+app.get('/api/v1/random/affirmation', (req, res) => {
+  const getRandomAffirmation = data.affirmations[Math.floor(Math.random() * data.affirmations.length)]
+  res.json(getRandomAffirmation)
+});
 
-// app.listen(port, () => {
-//   console.log(`Server is running on port ${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
