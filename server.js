@@ -9,6 +9,11 @@ app.get('/', (req, res) => {
   console.log(data)
 });
 
+app.get('/:endpoint', (req, res) => {
+  const endpoint = req.params.endpoint
+  res.send(data[endpoint]);
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
