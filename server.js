@@ -4,7 +4,7 @@ const port = process.env.PORT || 3000;
 const data = require('./data')
 
 app.get('/', (req, res) => {
-  res.send('App working', data);
+  res.send('App working');
   res.send.json(data)
 });
 
