@@ -78,15 +78,19 @@ app.delete('/api/v1/data/users/:id', (req, res) => {
   const quote = Object.values(req.body)[0];
   const userIndex = data.users.findIndex(user => user.id === id);
 
-  console.log('id', id)
-  console.log('quote----', quote)
-  console.log('userIndex', data.users[userIndex])
-
   if (userIndex !== -1) {
     const quoteIndex = data.users[userIndex]["favorite quotes"].findIndex(fav => fav.replace('"', '') === quote);
-    const quoteIndex2 = data.users[userIndex]["favorite quotes"].forEach((fav, index) => {
-      console.log(fav, quote, index, fav === quote)
+    let quoteIndex2
+    data.users[userIndex]["favorite quotes"].forEach((fav, index) => {
+      if(fav === quote){
+        console.log('TRUE: ', index)
+        quoteIndex2 = index
+        return
+      }{
+        console.log('NO MATCH')
+      }
     })
+    console.log(quoteIndex2)
     console.log(quoteIndex)
     if (quoteIndex !== -1) {
       console.log('****************THISQUOTE**************',data.users[userIndex]["favorite quotes"][quoteIndex])
@@ -108,3 +112,5 @@ app.delete('/api/v1/data/users/:id', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+
