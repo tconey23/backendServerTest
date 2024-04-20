@@ -45,10 +45,7 @@
       "favorite quotes": [],
       "favorite activities": [],
       "thoughts": [
-        {
-          "id": 1713452982185,
-          "thisThought": "Happy"
-        }
+          "Happy"
       ]
     },
     {
@@ -67,10 +64,7 @@
       ],
       "favorite activities": [],
       "thoughts": [
-        {
-          "id": 1713452982185,
-          "thisThought": "Happy"
-        }
+        "Happy"
       ]
     }
   ],
