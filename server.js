@@ -79,7 +79,7 @@ app.delete('/api/v1/data/users/:id', (req, res) => {
   const userIndex = data.users.findIndex(user => user.id === id);
 
   if (userIndex !== -1) {
-    const quoteIndex = data.users[userIndex]["favorite quotes"].findIndex(fav => fav.replace('"', '') === quote);
+    let quoteIndex = data.users[userIndex]["favorite quotes"].findIndex(fav => fav.replace('"', '') === quote);
     let quoteIndex2
     data.users[userIndex]["favorite quotes"].forEach((fav, index) => {
       if(fav === quote){
@@ -90,8 +90,7 @@ app.delete('/api/v1/data/users/:id', (req, res) => {
         console.log('NO MATCH')
       }
     })
-    console.log(quoteIndex2)
-    console.log(quoteIndex)
+    quoteIndex === -1 && quoteIndex2 ? quoteIndex = quoteIndex2 : console.log('quoteindex is a valid index');
     if (quoteIndex !== -1) {
       console.log('****************THISQUOTE**************',data.users[userIndex]["favorite quotes"][quoteIndex])
       data.users[userIndex]["favorite quotes"].splice(quoteIndex, 1);
