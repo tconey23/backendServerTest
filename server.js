@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 app.use(express.json());
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const data = require('./data');
 
 // Enable CORS for all routes
@@ -74,19 +74,32 @@ app.post('/api/v1/data/users/:id', (req, res) => {
 });
 
 app.delete('/api/v1/data/users/:id', (req, res) => {
-  const id = req.params.id
-  const quote = req.body
-  const userIndex = data.users.findIndex(user => user.id === id)
-  const userfind = data.users.find(user => user.id === id)
-  console.log('*************ID**QUOTE*********', id, quote)
-  if(userIndex !== -1){
-    console.log('************USERINDEX**************', userIndex)
-    const quoteIndex = data.users[userIndex]["favorite quotes"].findIndex(fav => fav === quote)
-    if(quoteIndex){data.users[userIndex]["favorite quotes"].splice(quoteIndex,1)
+  const id = req.params.id;
+  const quote = Object.values(req.body)[0];
+  const userIndex = data.users.findIndex(user => user.id === id);
+
+  console.log('id', id)
+  console.log('quote----', (Object.values(quote)[0]))
+  console.log('userIndex', data.users[userIndex])
+
+  if (userIndex !== -1) {
+    // const quoteIndex = data.users[userIndex]["favorite quotes"].findIndex(fav => fav.replace('"', '') === quote);
+    const quoteIndex = data.users[userIndex]["favorite quotes"].forEach((fav) => {
+      console.log(fav, quote, fav === quote)
+    })
+    console.log(quoteIndex)
+    if (quoteIndex !== -1) {
+      data.users[userIndex]["favorite quotes"].splice(quoteIndex, 1);
+      console.log('Updated quotes for user:', data.users[userIndex]["favorite quotes"]);
+      res.status(200).send({ message: "Quote deleted successfully." });
+    } else {
+      res.status(404).send({ message: "Quote not found." });
     }
-  console.log(data.users[userIndex]["favorite quotes"])
+  } else {
+    res.status(404).send({ message: "User not found." });
   }
-})
+});
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
