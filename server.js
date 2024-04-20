@@ -75,8 +75,8 @@ app.post('/api/v1/data/users/:id', (req, res) => {
 
 app.delete('/api/v1/data/users/:id', (req, res) => {
   const id = req.params.id;
-  const quote = Object.values(req.body)[0];
-  const dataKey = Object.keys(quote)
+  const quote = Object.values(req.body)[0]
+  const dataKey = Object.keys(req.body)
   const userIndex = data.users.findIndex(user => user.id === id);
   console.log('****************DATAKEY', data.users[userIndex][dataKey])
   
