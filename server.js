@@ -50,16 +50,11 @@ app.put('/api/v1/data/active_user', (req, res) => {
 });
 
 app.post('/api/v1/data/users/:id', (req, res) => {
-  console.log("*********POST USERS*PARAMS********",req.params)
-  console.log("*********POST USERS*BODY********",req.body)
   const id = req.params.id;
   const newData = req.body;
   const dataKey = Object.keys(newData)
   const userIndex = data.users.findIndex(user => user.id === id);
   const userfind = data.users.find(user => user.id === id);
-
-  console.log("*********POST USERS*USER********",data.users)
-  console.log("*********POST USERS*USER*FIND*******",userfind)
 
   if (userIndex !== -1) {
       
@@ -77,6 +72,21 @@ app.post('/api/v1/data/users/:id', (req, res) => {
       res.status(404).json({ error: "User not found" });
   }
 });
+
+app.delete('/api/v1/data/users/:id', (req, res) => {
+  const id = req.params.id
+  const quote = req.body
+  const userIndex = data.users.findIndex(user => user.id === id)
+  const userfind = data.users.find(user => user.id === id)
+  console.log('*************ID**QUOTE*********', id, quote)
+  if(userIndex){
+    console.log('************USERINDEX**************', userIndex)
+    const quoteIndex = data.users[userIndex]["favorite quotes"].findIndex(fav => fav === quote)
+    if(quoteIndex){data.users[userIndex]["favorite quotes"].splice(quoteIndex,1)
+    }
+  res.json(data.users[userIndex]["favorite quotes"])
+  }
+})
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
