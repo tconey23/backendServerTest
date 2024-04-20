@@ -10,7 +10,7 @@
     {
       "id": 2,
       "name": "Sandbox",
-      "available": false,
+      "available": true,
       "path": "/sandbox",
       "element": "Sandbox"
     },
