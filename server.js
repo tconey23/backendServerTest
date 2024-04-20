@@ -76,12 +76,13 @@ app.post('/api/v1/data/users/:id', (req, res) => {
 app.delete('/api/v1/data/users/:id', (req, res) => {
   const id = req.params.id;
   const quote = Object.values(req.body)[0];
+  const dataKey = Object.keys(quote)
   const userIndex = data.users.findIndex(user => user.id === id);
   
   if (userIndex !== -1) {
-    let quoteIndex = data.users[userIndex]["favorite quotes"].findIndex(fav => fav.replace('"', '') === quote);
+    let quoteIndex = data.users[userIndex][dataKey].findIndex(fav => fav.replace('"', '') === quote);
     let quoteIndex2
-    data.users[userIndex]["favorite quotes"].forEach((fav, index) => {
+    data.users[userIndex][dataKey].forEach((fav, index) => {
       if(fav === quote){
         console.log('TRUE: ', index)
         quoteIndex2 = index
