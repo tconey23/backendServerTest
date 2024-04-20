@@ -79,16 +79,15 @@ app.delete('/api/v1/data/users/:id', (req, res) => {
   const userIndex = data.users.findIndex(user => user.id === id);
 
   console.log('id', id)
-  console.log('quote----', (Object.values(quote)[0]))
+  console.log('quote----', quote)
   console.log('userIndex', data.users[userIndex])
 
   if (userIndex !== -1) {
     const quoteIndex = data.users[userIndex]["favorite quotes"].findIndex(fav => fav.replace('"', '') === quote);
-    const quoteIndex2 = data.users[userIndex]["favorite quotes"].forEach((fav) => {
-      console.log(fav, quote, fav === quote)
+    const quoteIndex2 = data.users[userIndex]["favorite quotes"].forEach((fav, index) => {
+      console.log(fav, quote, index, fav === quote)
     })
     console.log(quoteIndex)
-    console.log(quoteIndex2)
     if (quoteIndex !== -1) {
       console.log('****************THISQUOTE**************',data.users[userIndex]["favorite quotes"][quoteIndex])
       data.users[userIndex]["favorite quotes"].splice(quoteIndex, 1);
