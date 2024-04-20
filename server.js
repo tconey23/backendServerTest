@@ -78,6 +78,7 @@ app.delete('/api/v1/data/users/:id', (req, res) => {
   const quote = Object.values(req.body)[0];
   const dataKey = Object.keys(quote)
   const userIndex = data.users.findIndex(user => user.id === id);
+  console.log('****************DATAKEY', data.users[userIndex][dataKey])
   
   if (userIndex !== -1) {
     let quoteIndex = data.users[userIndex][dataKey].findIndex(fav => fav.replace('"', '') === quote);
