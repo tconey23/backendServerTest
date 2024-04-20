@@ -92,8 +92,8 @@ app.delete('/api/v1/data/users/:id', (req, res) => {
       data.users[userIndex]["favorite quotes"].splice(quoteIndex, 1);
       console.log('Updated quotes for user:', data.users[userIndex]["favorite quotes"]);
       res.status(200).json({
-        message: "Quote deleted successfully.",
-        "favorite quotes": user["favorite quotes"]
+        message: `${quote} deleted successfully`,
+        "favorite quotes": data.users[userIndex]["favorite quotes"]
     });
     } else {
       res.status(404).send({ message: "Quote not found." });
