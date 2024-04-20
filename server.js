@@ -83,13 +83,13 @@ app.delete('/api/v1/data/users/:id', (req, res) => {
   console.log('userIndex', data.users[userIndex])
 
   if (userIndex !== -1) {
-    // const quoteIndex = data.users[userIndex]["favorite quotes"].findIndex(fav => fav.replace('"', '') === quote);
-    const quoteIndex = data.users[userIndex]["favorite quotes"].forEach((fav) => {
-      console.log(fav, quote, fav === quote)
-    })
+    const quoteIndex = data.users[userIndex]["favorite quotes"].findIndex(fav => fav.replace('"', '') === quote);
+    // const quoteIndex = data.users[userIndex]["favorite quotes"].forEach((fav) => {
+    //   console.log(fav, quote, fav === quote)
+    // })
     console.log(quoteIndex)
     if (quoteIndex !== -1) {
-      console.log(data.users[userIndex]["favorite quotes"][quoteIndex])
+      console.log('****************THISQUOTE**************',data.users[userIndex]["favorite quotes"][quoteIndex])
       data.users[userIndex]["favorite quotes"].splice(quoteIndex, 1);
       console.log('Updated quotes for user:', data.users[userIndex]["favorite quotes"]);
       res.status(200).json({
