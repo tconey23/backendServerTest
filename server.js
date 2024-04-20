@@ -79,12 +79,12 @@ app.delete('/api/v1/data/users/:id', (req, res) => {
   const userIndex = data.users.findIndex(user => user.id === id)
   const userfind = data.users.find(user => user.id === id)
   console.log('*************ID**QUOTE*********', id, quote)
-  if(userIndex){
+  if(userIndex !== -1){
     console.log('************USERINDEX**************', userIndex)
     const quoteIndex = data.users[userIndex]["favorite quotes"].findIndex(fav => fav === quote)
     if(quoteIndex){data.users[userIndex]["favorite quotes"].splice(quoteIndex,1)
     }
-  res.json(data.users[userIndex]["favorite quotes"])
+  console.log(data.users[userIndex]["favorite quotes"])
   }
 })
 
