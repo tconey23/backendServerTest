@@ -51,10 +51,11 @@ app.post('/api/v1/data/active_user', (req, res) => {
     })
 });
 
-app.post('/api/v1/data/users/:userId/', (req, res) => {
+app.post('/api/v1/data/users/:userId/:type', (req, res) => {
   const userId = req.params.userId;
   const newFavoriteQuote = Object.values(req.body)[0];
-
+  const dataType = req.params.type
+  console.log(dataType)
   try {
     const user = data.users.find(user => user.id === userId);
     
