@@ -93,7 +93,7 @@ app.delete('/api/v1/data/users/:userId/messages/', (req, res) => {
     user.messages.forEach((msg) => console.log(msg.id))
     if (index !== -1) {
       user.messages.splice(index, 1);
-      res.status(200).json({ message: `Message with ID ${messageId} deleted successfully`});
+      res.json(user);
     } else {
       res.status(404).json({ error: `Message with ID ${messageId} not found` });
     }
