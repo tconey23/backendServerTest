@@ -83,7 +83,7 @@ app.post('/api/v1/data/users/:id', (req, res) => {
 
 app.delete('/api/v1/data/users/:id', (req, res) => {
     const id = req.params.id;
-    const quote = Object.values(req.body)
+    const quote = Object.values(req.body).toString()
     const dataKey = Object.keys(req.body)
     const userIndex = data.users.findIndex(user => user.id === id);
     console.log(id, quote, dataKey, userIndex)
