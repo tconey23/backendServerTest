@@ -58,7 +58,7 @@ app.post('/api/v1/data/users/:id', (req, res) => {
     const id = req.params.id;
     const { favorite } = req.body;
     const quote = Object.values(favorite)[0]; // Extracting the quote from the object
-    // Remaining logic to add the favorite quote to the user's data
+    const user = data.users.find((user) => user.id === id)["favorite quotes"].push(quote)
   } catch (error) {
     console.error("There was a problem adding the favorite quote:", error);
     res.status(500).json({ error: "Internal server error" });
