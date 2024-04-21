@@ -88,7 +88,7 @@ app.delete('/api/v1/data/users/:id', (req, res) => {
     const userIndex = data.users.findIndex(user => user.id === id);
     console.log(id, quote, dataKey, userIndex)
     if (userIndex !== -1) {
-        let quoteIndex = data.users[userIndex][dataKey].findIndex(fav => fav.trim() === quote);
+        let quoteIndex = data.users[userIndex][dataKey].findIndex(fav => fav.trim() === quote.trim());
         let quoteIndex2
         data.users[userIndex][dataKey].forEach((fav, index) => {
           console.log(fav, quote)
