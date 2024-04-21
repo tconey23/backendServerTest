@@ -90,6 +90,7 @@ app.delete('/api/v1/data/users/:userId/messages/', (req, res) => {
     }
 
     const index = user.messages.findIndex(message => message.id === messageId);
+    user.messages.forEach((msg) => console.log(msg.id))
     if (index !== -1) {
       user.messages.splice(index, 1);
       res.status(200).json({ message: `Message with ID ${messageId} deleted successfully`});
