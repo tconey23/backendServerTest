@@ -28,7 +28,7 @@ app.get('/api/v1/data/users/:id/messages', (req, res) => {
     const id = req.params.id
     const findUser = data.users.find((user) => user.id === `${id}`)
     if (findUser) {
-        const responseData = findUser
+        const responseData = findUser.messages
         res.json(responseData);
     } else {
         res.status(404).json({
@@ -79,24 +79,21 @@ app.post('/api/v1/data/users/:userId/', (req, res) => {
   }
 });
 
-app.delete('/api/v1/data/users/:userId/messages/:messageId', (req, res) => {
+app.delete('/api/v1/data/users/:userId/messages/', (req, res) => {
   try {
-    const userId = parseInt(req.params.userId); // Parse the user ID
-    const messageId = parseInt(req.params.messageId); // Parse the message ID
+    const userId = parseInt(req.params.userId); 
+    const messageId = parseInt(req.body.msgId); 
 
-    // Find the user by ID
-    const user = data.users.find(user => user.id === userId);
-
+    const user = data.users.find((user) => user.id == userId)
+    console.log(user)
     if (!user) {
       return res.status(404).json({ error: `User with ID ${userId} not found` });
     }
 
-    // Find the message by ID within the user's object
     const index = user.messages.findIndex(message => message.id === messageId);
-
     if (index !== -1) {
-      user.messages.splice(index, 1); // Remove the message from the array
-      res.status(200).json({ message: `Message with ID ${messageId} deleted successfully` });
+      user.messages.splice(index, 1);
+      res.status(200).json({ message: `Message with ID ${messageId} deleted successfully`});
     } else {
       res.status(404).json({ error: `Message with ID ${messageId} not found` });
     }
@@ -104,7 +101,7 @@ app.delete('/api/v1/data/users/:userId/messages/:messageId', (req, res) => {
     console.error("There was a problem deleting the message:", error);
     res.status(500).json({ error: "Internal server error" });
   }
-});
+}); 
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
