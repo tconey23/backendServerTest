@@ -81,6 +81,8 @@ app.delete('/api/v1/data/users/:userId/messages/', (req, res) => {
     const userId = parseInt(req.params.userId); 
     const messageId = parseInt(req.body.msgId); 
 
+    console.log(typeof messageId)
+
     const user = data.users.find((user) => user.id == userId)
     console.log(user)
     if (!user) {
