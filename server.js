@@ -68,7 +68,7 @@ app.post('/api/v1/data/users/:id', (req, res) => {
             res.json({
                 message: `${dataKey} updated successfully`,
                 updatedUser: data.users[userIndex],
-                updatedData: data.users[userIndex][dataKey]
+                "favorite quotes": data.users[userIndex][dataKey]
             })
         } else {
             res.json('Duplicate Record')
