@@ -5,7 +5,6 @@ app.use(express.json());
 const port = process.env.PORT || 3001;
 const data = require('./data');
 
-// Enable CORS for all routes
 app.use(cors());
 
 app.get('/', (req, res) => {
@@ -68,7 +67,8 @@ app.post('/api/v1/data/users/:id', (req, res) => {
             data.users[userIndex][dataKey].push(newData[dataKey]);
             res.json({
                 message: `${dataKey} updated successfully`,
-                updatedUser: data.users[userIndex]
+                updatedUser: data.users[userIndex],
+                updatedData: data.users[userIndex][dataKey]
             })
         } else {
             res.json('Duplicate Record')
