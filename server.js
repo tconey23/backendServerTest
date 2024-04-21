@@ -94,7 +94,7 @@ app.delete('/api/v1/data/users/:id', (req, res) => {
                 quoteIndex2 = index
                 return
             } {
-                console.log('NO MATCH')
+                console.log('NO MATCH')   
             }
         })
         quoteIndex === -1 && quoteIndex2 ? quoteIndex = quoteIndex2 : console.log('quoteindex is a valid index');
