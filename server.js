@@ -68,9 +68,8 @@ app.post('/api/v1/data/users/:userId/', (req, res) => {
     }
 
     // Push the new favorite quote if it's not a duplicate
-    user[dataKey].push(newFavoriteQuote);
-    
-    res.status(201).json({user});
+    user['messages'].push(newFavoriteQuote);
+    res.json(user);
   } catch (error) {
     console.error("There was a problem adding the favorite quote:", error);
     res.status(500).json({ error: "Internal server error" });
