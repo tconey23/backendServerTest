@@ -64,7 +64,7 @@ app.post('/api/v1/data/users/:id', (req, res) => {
         }
         const duplicateRecord = data.users[userIndex][dataKey].includes(newData[dataKey])
         if (!duplicateRecord) {
-            data.users[userIndex][dataKey].push(newData[dataKey]);
+            data.users[userIndex][dataKey].push(newData);
             res.json({
                 message: `${dataKey} updated successfully`,
                 updatedUser: data.users[userIndex],
