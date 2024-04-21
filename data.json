@@ -42,7 +42,7 @@
       "name": "Tom",
       "account type": "parent",
       "stats": [],
-      "favorite quotes": [],
+      "messages": [],
       "favorite activities": [],
       "thoughts": [  
       ]
@@ -53,7 +53,7 @@
       "account type": "child",
       "stats": [],
       "favorite quotes": [],
-      "favorite activities": [],
+      "messages": [],
       "thoughts": [
       ]
     }

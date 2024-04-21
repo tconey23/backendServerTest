@@ -51,55 +51,59 @@ app.post('/api/v1/data/active_user', (req, res) => {
     })
 });
 
-app.post('/api/v1/data/users/:id', (req, res) => {
-  console.log(req.body)
-  console.log(req.params)
+app.post('/api/v1/data/users/:userId/', (req, res) => {
+  const userId = req.params.userId;
+  const newFavoriteQuote = Object.values(req.body)[0];
+  const dataKey = "messages"; 
+
   try {
-    const id = req.params.id;
-    const { favorite } = req.body;
-    const quote = Object.values(favorite)[0]; // Extracting the quote from the object
-    const user = data.users.find((user) => user.id === id)["favorite quotes"].push(quote)
+    const user = data.users.find(user => user.id === userId);
+    
+    if (!user) {
+      const re = res.status(404).json({ error: `User with ID ${userId} not found` });
+      return re
+    }
+    const isDuplicate = user[dataKey].some(quote => quote === newFavoriteQuote);
+    console.log(isDuplicate)
+    if (isDuplicate) {
+      return res.status(400).json({ error: "Duplicate favorite quote" });
+    }
+
+    // Push the new favorite quote if it's not a duplicate
+    user[dataKey].push(newFavoriteQuote);
+    
+    res.status(201).json({ message: "Favorite quote added successfully", newFavoriteQuote });
   } catch (error) {
     console.error("There was a problem adding the favorite quote:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
-app.delete('/api/v1/data/users/:id', (req, res) => {
-    const id = req.params.id;
-    const quote = Object.values(req.body).toString()
-    const dataKey = Object.keys(req.body)
-    const userIndex = data.users.findIndex(user => user.id === id);
-    console.log(id, quote, dataKey, userIndex)
-    if (userIndex !== -1) {
-        let quoteIndex = data.users[userIndex][dataKey].findIndex(fav => fav.trim() === quote.trim());
-        let quoteIndex2
-        data.users[userIndex][dataKey].forEach((fav, index) => {
-          console.log(fav.trim(), quote.trim())
-            if (fav === quote) {
-                quoteIndex2 = index
-                return
-            } {
-                console.log('NO MATCH')   
-            }
-        })
-        quoteIndex === -1 && quoteIndex2 ? quoteIndex = quoteIndex2 : console.log('quoteindex is a valid index');
-        if (quoteIndex !== -1) {
-            data.users[userIndex]["favorite quotes"].splice(quoteIndex, 1);
-            res.status(200).json({
-                message: `${quote} deleted successfully`,
-                "favorite quotes": data.users[userIndex]["favorite quotes"]
-            });
-        } else {
-            res.status(404).send({
-                message: "Quote not found."
-            });
-        }
-    } else {
-        res.status(404).send({
-            message: "User not found."
-        });
+app.delete('/api/v1/data/users/:userId/messages/:messageId', (req, res) => {
+  try {
+    const userId = parseInt(req.params.userId); // Parse the user ID
+    const messageId = parseInt(req.params.messageId); // Parse the message ID
+
+    // Find the user by ID
+    const user = data.users.find(user => user.id === userId);
+
+    if (!user) {
+      return res.status(404).json({ error: `User with ID ${userId} not found` });
     }
+
+    // Find the message by ID within the user's object
+    const index = user.messages.findIndex(message => message.id === messageId);
+
+    if (index !== -1) {
+      user.messages.splice(index, 1); // Remove the message from the array
+      res.status(200).json({ message: `Message with ID ${messageId} deleted successfully` });
+    } else {
+      res.status(404).json({ error: `Message with ID ${messageId} not found` });
+    }
+  } catch (error) {
+    console.error("There was a problem deleting the message:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 app.listen(port, () => {
