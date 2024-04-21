@@ -58,8 +58,6 @@ app.post('/api/v1/data/users/:id', (req, res) => {
     const newValue = Object.values(newData)
     const userIndex = data.users.findIndex(user => user.id === id);
 
-
-
     if (userIndex !== -1) {
 
         if (!data.users[userIndex][dataKey]) {
@@ -85,7 +83,7 @@ app.post('/api/v1/data/users/:id', (req, res) => {
 
 app.delete('/api/v1/data/users/:id', (req, res) => {
     const id = req.params.id;
-    const quote = Object.values(req.body)[0]
+    const quote = Object.values(req.body)
     const dataKey = Object.keys(req.body)
     const userIndex = data.users.findIndex(user => user.id === id);
     if (userIndex !== -1) {
