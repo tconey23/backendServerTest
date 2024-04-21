@@ -55,16 +55,19 @@ app.post('/api/v1/data/users/:id', (req, res) => {
     const id = req.params.id;
     const newData = req.body;
     const dataKey = Object.keys(newData)
+    const newValue = Object.values(newData)
     const userIndex = data.users.findIndex(user => user.id === id);
+
+
 
     if (userIndex !== -1) {
 
         if (!data.users[userIndex][dataKey]) {
             data.users[userIndex][dataKey] = [];
         }
-        const duplicateRecord = data.users[userIndex][dataKey].includes(newData[dataKey])
+        const duplicateRecord = data.users[userIndex][dataKey].includes(newValue)
         if (!duplicateRecord) {
-            data.users[userIndex][dataKey].push(newData);
+            data.users[userIndex][dataKey].push(newValue);
             res.json({
                 message: `${dataKey} updated successfully`,
                 updatedUser: data.users[userIndex],
