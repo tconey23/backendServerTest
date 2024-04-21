@@ -54,17 +54,15 @@ app.post('/api/v1/data/active_user', (req, res) => {
 app.post('/api/v1/data/users/:userId/', (req, res) => {
   const userId = req.params.userId;
   const newFavoriteQuote = Object.values(req.body)[0];
-  const dataKey = "messages"; 
 
   try {
     const user = data.users.find(user => user.id === userId);
     
     if (!user) {
-      const re = res.status(404).json({ error: `User with ID ${userId} not found` });
-      return re
+      const ret = res.status(404).json({ error: `User with ID ${userId} not found` });
+      return ret
     }
-    const isDuplicate = user[dataKey].some(quote => quote === newFavoriteQuote);
-    console.log(isDuplicate)
+    const isDuplicate = user['messages'].some(quote => quote === newFavoriteQuote);
     if (isDuplicate) {
       return res.status(400).json({ error: "Duplicate favorite quote" });
     }
@@ -72,7 +70,7 @@ app.post('/api/v1/data/users/:userId/', (req, res) => {
     // Push the new favorite quote if it's not a duplicate
     user[dataKey].push(newFavoriteQuote);
     
-    res.status(201).json({ message: "Favorite quote added successfully", newFavoriteQuote });
+    res.status(201).json({user});
   } catch (error) {
     console.error("There was a problem adding the favorite quote:", error);
     res.status(500).json({ error: "Internal server error" });
