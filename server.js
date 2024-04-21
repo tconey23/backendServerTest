@@ -73,7 +73,7 @@ app.post('/api/v1/data/users/:userId/:type', (req, res) => {
     }
 
     // Push the new favorite quote if it's not a duplicate
-    user['messages'].push(newFavoriteQuote);
+    user[dataType].push(newFavoriteQuote);
     res.json(user);
   } catch (error) {
     console.error("There was a problem adding the favorite quote:", error);
