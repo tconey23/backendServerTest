@@ -58,11 +58,6 @@ app.post('/api/v1/data/users/:userId/:type', (req, res) => {
 
   try {
     const user = data.users.find(user => user.id === userId);
-    console.log('***********************', userId)
-    console.log('***********************', newFavoriteQuote)
-    console.log('***********************', dataType)
-    console.log('***********************', user.dataType)
-    console.log('***********************', user[dataType])
     if (!user) {
       const ret = res.status(404).json({ error: `User with ID ${userId} not found` });
       return ret
