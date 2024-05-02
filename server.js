@@ -4,6 +4,7 @@ const app = express();
 app.use(express.json());
 const port = process.env.PORT || 3001;
 const data = require('./data');
+const bananas = require('./bananas');
 
 app.use(cors());
 
@@ -102,6 +103,11 @@ app.delete('/api/v1/data/users/:userId/messages/', (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 }); 
+
+app.get('/api/v1/bananas/users', (req, res) => {
+  const getRandomAffirmation = data.affirmations[Math.floor(Math.random() * data.affirmations.length)];
+  res.json(getRandomAffirmation);
+});
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
