@@ -39,7 +39,7 @@
   "users": [
     {
       "id": "1",
-      "name": "Tom",
+      "name": "User1",
       "account type": "parent",
       "stats": [],
       "messages": [],
@@ -49,7 +49,7 @@
     },
     {
       "id": "2",
-      "name": "Max",      
+      "name": "User2",      
       "account type": "child",
       "stats": [],
       "messages": [],
