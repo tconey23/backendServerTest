@@ -39,7 +39,7 @@
   "users": [
     {
       "id": "1",
-      "name": "User1",  
+      "name": "Tom",  
       "account type": "parent",
       "stats": [],
       "messages": [],
@@ -49,7 +49,7 @@
     },
     {
       "id": "2",
-      "name": "User2",      
+      "name": "Max",      
       "account type": "child",
       "stats": [],
       "messages": [],
@@ -107,6 +107,6 @@
     "It's not a mistake, it's a learning opportunity"
   ],
   "active_user": {
-    "name": "Max"
+    "name": ""
   }
 }
