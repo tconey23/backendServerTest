@@ -30,7 +30,7 @@
     },
     {
       "id": 5,
-      "name": "Galactic Pool",
+      "name": "Galactic Pool",  
       "available": false,
       "path": "/galacticpool",
       "element": "GalacticPool"
@@ -39,7 +39,7 @@
   "users": [
     {
       "id": "1",
-      "name": "User1",
+      "name": "User1",  
       "account type": "parent",
       "stats": [],
       "messages": [],
